@@ -7,4 +7,16 @@
 	st = status --short --branch
 	lol = log --all --graph --decorate --oneline --abbrev-commit
 	diffc = diff --cached
+[diff]
+    tool = nvimdiff
+    noprefix = true
+    renames = copies
+[difftool]
+    prompt = True
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[merge]
+    tool = vimdiff
+[mergetool "vimdiff"]
+    path = nvim
 
