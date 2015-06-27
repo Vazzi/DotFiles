@@ -196,6 +196,7 @@ let g:syntastic_java_javac_config_file_enabled = 1
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args = '--ignore=E302 --max-line-length=85'
 
+
 " Equal sizes of splits when window resize
 au VimResized * :wincmd =
 
@@ -211,6 +212,7 @@ set listchars=trail:·,tab:>-
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_global_ycm_extra_conf = '~/.nvim/.ycm_extra_conf.py'
+let g:ycm_show_diagnostics_ui = 0 " Syntastics problem solver
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger = '<C-y>'
