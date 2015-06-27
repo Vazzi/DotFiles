@@ -151,6 +151,9 @@ highlight ExtraWhitespace ctermbg=red
 highlight ExtraWhitespace guibg=red
 match ExtraWhitespace /\s\+$/
 
+" Delimitmate config
+let delimitMate_expand_cr = 1
+
 " Turn off code folding from python-mode
 let g:pymode_folding = 0
 " Turn off python-mode breakpoints
@@ -165,6 +168,7 @@ let g:ctrlp_custom_ignore = {
             \ 'dir':  '\v[\/]\.(git|hg|svn)$',
             \ 'file': '\v\.(pyc|swp|so|class|zip|o)$',
             \ }
+
 
 " NERDTree
 let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.class$']
