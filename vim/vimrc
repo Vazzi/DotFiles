@@ -1,7 +1,13 @@
 set nocompatible
 
+if !has('nvim')
+    echo "You have to use Neovim"
+    exit
+endif
+
 " Automatic reloading of .vimrc
-autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost vimrc source ~/.nvimrc
+autocmd! bufwritepost .nvimrc source %
 
 " Reload file if it was changed
 set autoread
@@ -80,63 +86,64 @@ autocmd InsertLeave * set number relativenumber
 vnoremap < <gv
 vnoremap > >gv
 
-" Set runtimepath for Vundle and initialiaze it
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.nvim/plugged')
 
 " Vundle can manage itself
-Plugin 'gmarik/Vundle.vim'
+Plug 'gmarik/Vundle.vim'
 
 " Library needed by some plugins
-Plugin 'L9'
+Plug 'L9'
 
 " Fuzzy finder for files and buffers
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 
 " Quick navigation for files/folders in current folder
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " Quick switching between source and header file
-Plugin 'a.vim'
+Plug 'a.vim'
 
 " Check source code syntax
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
 " Easy managing for snippets
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Autocompletion for quotes, parentheses etc
-Plugin 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 
 " Groovy syntax for .gradle files
-Plugin 'tfnico/vim-gradle'
+Plug 'tfnico/vim-gradle'
 
 " Python mode plugin for better indention, autocomplete etc
-Plugin 'klen/python-mode'
+Plug 'klen/python-mode'
 
 " Autocompletion in insert mode
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
+"
+" Autocomplete
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
 
 " Changes Vim working directory to project root
-Plugin 'airblade/vim-rooter'
+Plug 'airblade/vim-rooter'
 
 " Displays tags in a window
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 " Git wrapper
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " Quick (un)comment line(s)
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 
 " Jellybeans
-Plugin 'vim-scripts/jellybeans.vim'
+Plug 'vim-scripts/jellybeans.vim'
 
 " Airline - like powerline
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
 
-call vundle#end()
+call plug#end()
 
 " Color scheme
 colorscheme jellybeans
@@ -175,7 +182,6 @@ let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.class$']
 " Map Ctrl + x to open NERDTree file explorer
 nnoremap <C-x> :NERDTreeToggle<CR>
 inoremap <C-x> <Esc>:NERDTreeToggle<CR>
-
 
 " Airline settings
 let g:airline_powerline_fonts = 1
