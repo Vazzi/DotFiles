@@ -186,9 +186,17 @@ inoremap <C-x> <Esc>:NERDTreeToggle<CR>
 
 " Airline settings
 let g:airline_powerline_fonts = 1
+let g:airline_left_sep = '>'
+let g:airline_right_sep = '<'
+let g:airline_theme = 'jellybeans'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 set laststatus=2
+
+" Fugitive mapping
+nmap <silent> <leader>gs :Gstatus<cr>
+nmap <silent> <leader>gd :Gdiff<cr>
+nmap <silent> <leader>gb :Gblame<cr>
 
 " TagBar
 nmap <F8> :TagbarOpenAutoClose<CR>
@@ -224,4 +232,7 @@ let g:UltiSnipsExpandTrigger = '<C-y>'
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+" Scroll faster
+nnoremap <c-e> 5<c-e>
+nnoremap <c-y> 5<c-y>
 
