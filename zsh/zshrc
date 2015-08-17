@@ -1,0 +1,44 @@
+# History
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+
+# History settings
+setopt HIST_VERIFY
+setopt EXTENDED_HISTORY
+setopt HIST_REDUCE_BLANKS
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+
+# Complete aliases
+setopt COMPLETE_ALIASES
+
+autoload -Uz compinit
+compinit
+
+# Use Neovim as text editor
+export EDITOR=nvim
+
+# Syntax Highlight
+source /usr/local/Cellar/zsh-syntax-highlighting/0.2.1/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# PowerLine
+source /usr/local/lib/python3.4/site-packages/powerline/bindings/zsh/powerline.zsh
+
+# History
+bindkey '^R' history-incremental-search-backward
+
+# Virtual env for python
+export WORKON_HOME='~/Development/Python/Environments/'
+source /usr/local/bin/virtualenvwrapper.sh
+export PATH="/usr/local/sbin:$PATH"
+
+# Aliases
+alias vim='mvim -v'
+
+# Tmux aliases
+alias ta='tmux attach'
+alias tat='tmux attach -t'
+alias tls='tmux ls'
+alias tn='tmux new-session -s'
+
