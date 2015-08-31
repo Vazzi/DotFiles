@@ -8,4 +8,7 @@ In this repository I share my configuration files (dotfiles) that I use most.
 
 * Git
 
+* Zsh
+
+* Tmux
 
