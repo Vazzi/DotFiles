@@ -19,6 +19,9 @@ setopt COMPLETE_ALIASES
 autoload -Uz compinit
 compinit
 
+# Set key binding to emacs (no insert/normal mode)
+bindkey -e
+
 # Use Neovim as text editor
 export EDITOR=nvim
 
