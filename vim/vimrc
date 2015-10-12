@@ -25,6 +25,9 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+autocmd FileType ruby setlocal tabstop=2
+autocmd FileType ruby setlocal shiftwidth=2
+
 " Show commands int bottom right corner
 set showcmd
 
