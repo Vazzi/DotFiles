@@ -1,10 +1,5 @@
 set nocompatible
 
-if !has('nvim')
-    echo "You have to use Neovim"
-    exit
-endif
-
 " Automatic reloading of .vimrc
 autocmd! bufwritepost vimrc source ~/.nvimrc
 autocmd! bufwritepost .nvimrc source %

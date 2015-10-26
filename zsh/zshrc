@@ -22,8 +22,8 @@ compinit
 # Set key binding to emacs (no insert/normal mode)
 bindkey -e
 
-# Use Neovim as text editor
-export EDITOR=nvim
+# Use Vim as text editor
+export EDITOR=vim
 
 # Syntax Highlight
 source /usr/local/Cellar/zsh-syntax-highlighting/0.2.1/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -40,7 +40,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 export PATH="/usr/local/sbin:$PATH"
 
 # Aliases
-alias vim='mvim -v'
+# alias vim='mvim -v'
 
 # Tmux aliases
 alias ta='tmux attach'
