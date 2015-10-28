@@ -1,8 +1,10 @@
 set nocompatible
 
-" Automatic reloading of .vimrc
-autocmd! bufwritepost vimrc source ~/.nvimrc
-autocmd! bufwritepost .nvimrc source %
+" Automatic reloading of .nvimrc
+autocmd! bufwritepost nvimrc source %
+
+" Set backup directory
+set backupdir=~/.local/share/nvim/swap
 
 " Reload file if it was changed
 set autoread
@@ -22,6 +24,9 @@ set expandtab
 
 autocmd FileType ruby setlocal tabstop=2
 autocmd FileType ruby setlocal shiftwidth=2
+
+" Set mapleader to comma
+let mapleader = ','
 
 " Show commands int bottom right corner
 set showcmd
@@ -49,8 +54,8 @@ inoremap ˚ <Esc>:m .-2<CR>==gi
 vnoremap ∆ :m '>+1<CR>gv=gv
 vnoremap ˚ :m '<-2<CR>gv=gv
 
-" Set mapleader to comma
-let mapleader = ','
+" Remove trailing spaces
+nmap <Leader><space> :%s/\s\+$<cr>
 
 " Highlight searched word
 set incsearch
@@ -84,7 +89,10 @@ autocmd InsertLeave * set number relativenumber
 vnoremap < <gv
 vnoremap > >gv
 
-call plug#begin('~/.nvim/plugged')
+" Disable mouse
+set mouse=
+
+call plug#begin('~/.config/nvim/plugged')
 
 " Vundle can manage itself
 Plug 'gmarik/Vundle.vim'
@@ -210,7 +218,7 @@ au VimResized * :wincmd =
 
 " Highlight trailing whitespaces
 highlight ExtraWhitespace ctermbg=red
-match ExtraWhitespace /\s\+$/
+au BufWinEnter * match ExtraWhitespace /\s\+$/
 " Show trailing whitespace as dot
 " Show tab character as >-
 set list
