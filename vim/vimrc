@@ -144,7 +144,7 @@ Plug 'scrooloose/nerdcommenter'
 "Plug 'nanotech/jellybeans.vim'
 
 " Solarized
-Plug 'nanotech/jellybeans.vim'
+Plug 'altercation/vim-colors-solarized'
 
 " Airline - like powerline
 Plug 'bling/vim-airline'
@@ -155,7 +155,7 @@ Plug 'rizzatti/dash.vim'
 call plug#end()
 
 " Color scheme
-colorscheme jellybeans
+colorscheme solarized
 
 " Syntax highlighting
 filetype off
@@ -195,7 +195,7 @@ inoremap <C-x> <Esc>:NERDTreeToggle<CR>
 
 " Airline settings
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'jellybeans'
+let g:airline_theme = 'solarized'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 set laststatus=2
