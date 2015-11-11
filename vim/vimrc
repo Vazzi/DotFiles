@@ -141,6 +141,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
 
 " Jellybeans
+"Plug 'nanotech/jellybeans.vim'
+
+" Solarized
 Plug 'nanotech/jellybeans.vim'
 
 " Airline - like powerline
