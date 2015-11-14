@@ -110,7 +110,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'a.vim'
 
 " Check source code syntax
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
+Plug 'benekastah/neomake'
 
 " Easy managing for snippets
 Plug 'SirVer/ultisnips'
@@ -121,9 +122,6 @@ Plug 'Raimondi/delimitMate'
 
 " Groovy syntax for .gradle files
 Plug 'tfnico/vim-gradle'
-
-" Python mode plugin for better indention, autocomplete etc
-Plug 'klen/python-mode'
 
 " Autocomplete
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
@@ -157,6 +155,9 @@ Plug 'keith/swift.vim'
 
 call plug#end()
 
+" Run everytime neomake
+autocmd! BufWritePost * Neomake
+
 " Color scheme
 colorscheme solarized
 
@@ -173,15 +174,6 @@ match ExtraWhitespace /\s\+$/
 " Delimitmate config
 let delimitMate_expand_cr = 1
 imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
-
-" Turn off code folding from python-mode
-let g:pymode_folding = 0
-" Turn off python-mode breakpoints
-let g:pymode_breakpoint = 0
-" Turn off python-mode code checking (I am using syntastic)
-let g:pymode_lint = 0
-" Turn off python-mode rope
-let g:pymode_rope = 0
 
 " Ctrlp should ignore some hidden folders and binary/temp files
 let g:ctrlp_custom_ignore = {
@@ -210,14 +202,6 @@ nmap <silent> <leader>gb :Gblame<cr>
 
 " TagBar
 nmap <F8> :TagbarOpenAutoClose<CR>
-
-" Syntastic java
-let g:syntastic_java_checkers = ['checkstyle', 'javac']
-let g:syntastic_java_javac_config_file_enabled = 1
-
-" Syntastic python
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args = '--ignore=E302 --max-line-length=85'
 
 " Equal sizes of splits when window resize
 au VimResized * :wincmd =
