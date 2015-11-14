@@ -152,6 +152,9 @@ Plug 'bling/vim-airline'
 " Dash app helper
 Plug 'rizzatti/dash.vim'
 
+" Swift
+Plug 'keith/swift.vim'
+
 call plug#end()
 
 " Color scheme
