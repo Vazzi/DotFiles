@@ -48,6 +48,11 @@ if [[ "$(uname | grep Darwin)" ]]; then
 fi
 export PATH="/usr/local/sbin:$PATH"
 
+# Ruby
+if [[ "$(uname | grep Linux)" ]]; then
+    export PATH=="$HOME/.gem/ruby/2.2.0/bin:$PATH"
+fi
+
 # Aliases
 # Tmux aliases
 alias ta='tmux attach'
