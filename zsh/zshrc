@@ -25,12 +25,12 @@ bindkey -e
 # Use Vim as text editor
 export EDITOR=nvim
 
-if [[ "$OSTYPE" == "darwin15.0" ]]; then
+if [[ "$(uname | grep Darwin)" ]]; then
     # Syntax Highlight
     source /usr/local/Cellar/zsh-syntax-highlighting/0.2.1/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     # PowerLine
     source /usr/local/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
-elif [[ "$OSTYPE" = "linux-gnu" ]]; then
+elif [[ "$(uname | grep Darwin)" ]]; then
     # Syntax Highlight
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     # PowerLine
