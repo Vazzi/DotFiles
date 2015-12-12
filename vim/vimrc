@@ -71,9 +71,6 @@ set colorcolumn=85
 set guioptions+=LlRrb
 set guioptions-=LlRrb
 
-" GUI font
-set guifont=Source\ Code\ Pro\ for\ Powerline:h12
-
 " Display ruler on the right side of the status line at the bottom of the window
 set ruler
 
@@ -110,7 +107,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'a.vim'
 
 " Check source code syntax
-"Plug 'scrooloose/syntastic'
 Plug 'benekastah/neomake'
 
 " Easy managing for snippets
@@ -122,9 +118,6 @@ Plug 'Raimondi/delimitMate'
 
 " Groovy syntax for .gradle files
 Plug 'tfnico/vim-gradle'
-
-" Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
 
 " Changes Vim working directory to project root
 Plug 'airblade/vim-rooter'
@@ -165,11 +158,6 @@ colorscheme solarized
 filetype off
 filetype plugin indent on
 syntax on
-
-" Highlight trailing whitespaces
-highlight ExtraWhitespace ctermbg=red
-highlight ExtraWhitespace guibg=red
-match ExtraWhitespace /\s\+$/
 
 " Delimitmate config
 let delimitMate_expand_cr = 1
@@ -214,17 +202,8 @@ au BufWinEnter * match ExtraWhitespace /\s\+$/
 set list
 set listchars=trail:·,tab:>-
 
-" YouCompleteMe
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_global_ycm_extra_conf = '~/.nvim/.ycm_extra_conf.py'
-let g:ycm_show_diagnostics_ui = 0 " Syntastics problem solver
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-
 " Ultisnips
-let g:UltiSnipsExpandTrigger = '<C-y>'
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger = '<tab>'
 
 " Scroll faster
 nnoremap <c-e> 5<c-e>
