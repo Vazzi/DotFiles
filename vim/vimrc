@@ -140,6 +140,9 @@ Plug 'altercation/vim-colors-solarized'
 " Airline - like powerline
 Plug 'bling/vim-airline'
 
+" Airline - theme
+Plug 'vim-airline/vim-airline-themes'
+
 " Dash app helper
 Plug 'rizzatti/dash.vim'
 
