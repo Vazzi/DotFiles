@@ -27,9 +27,9 @@ export EDITOR=nvim
 
 if [[ "$(uname | grep Darwin)" ]]; then
     # Syntax Highlight
-    source /usr/local/Cellar/zsh-syntax-highlighting/0.2.1/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     # PowerLine
-    source /usr/local/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
+    source /usr/local/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
 elif [[ "$(uname | grep Linux)" ]]; then
     # Syntax Highlight
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
