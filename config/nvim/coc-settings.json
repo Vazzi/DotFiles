@@ -1,0 +1,31 @@
+{
+  "explorer.icon.enableNerdfont": true,
+  "explorer.position": "left",
+  "explorer.quitOnOpen": true,
+  "explorer.previewAction.onHover": true,
+  "explorer.activeMode": true,
+  "explorer.previewAction.strategy": "labeling",
+
+  "highlight.colors.enable": true,
+  "highlight.document.enable": true,
+  "highlight.colorNames.enable": true,
+
+  "coc.preferences.colorSupport": true,
+  "coc.preferences.useQuickfixForLocations": true,
+  "coc.preferences.snippets.enable": true,
+
+  "coc.preferences.formatOnSaveFiletypes": [
+    "python",
+    "javascript",
+    "javascriptreact",
+    "typescriptreact",
+    "css"
+  ],
+
+  "javascript.preferences.quoteStyle": "single",
+
+  "git.enableGutters": true,
+
+  "prettier.semi": true,
+  "prettier.tabWidth": 2
+}
