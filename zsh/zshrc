@@ -1,62 +1,32 @@
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
+# Path to your oh-my-zsh installation.
+export ZSH="~/.oh-my-zsh"
 
-# History
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="robbyrussell"
 
-# History settings
-setopt HIST_VERIFY
-setopt EXTENDED_HISTORY
-setopt HIST_REDUCE_BLANKS
-setopt SHARE_HISTORY
-setopt HIST_IGNORE_ALL_DUPS
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+    git
+    brew
+    tmux
+    fzf
+    thefuck
+    osx
+    zsh-interactive-cd
+)
 
-# Complete aliases
-setopt COMPLETE_ALIASES
+source $ZSH/oh-my-zsh.sh
 
-autoload -Uz compinit
-compinit
-
-# Set key binding to emacs (no insert/normal mode)
-bindkey -e
-
-# Use Vim as text editor
-export EDITOR=nvim
-
-if [[ "$(uname | grep Darwin)" ]]; then
-    # Syntax Highlight
-    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    # PowerLine
-    source /usr/local/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
-elif [[ "$(uname | grep Linux)" ]]; then
-    # Syntax Highlight
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    # PowerLine
-    source ~/.local/lib/python3.4/site-packages/powerline/bindings/zsh/powerline.zsh
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
 fi
-
-# History
-bindkey '^R' history-incremental-search-backward
-
-# Virtual env for python
-export WORKON_HOME='~/Development/Python/Environments/'
-if [[ "$(uname | grep Darwin)" ]]; then
-    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
-export PATH="/usr/local/sbin:$PATH"
-
-# Ruby
-if [[ "$(uname | grep Linux)" ]]; then
-    export PATH=="$HOME/.gem/ruby/2.2.0/bin:$PATH"
-fi
-
-# Aliases
-# Tmux aliases
-alias ta='tmux attach'
-alias tat='tmux attach -t'
-alias tls='tmux ls'
-alias tn='tmux new-session -s'
-
