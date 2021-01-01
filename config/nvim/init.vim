@@ -1,12 +1,12 @@
 set nocompatible
 
+set hidden " Required to keep multiple buffers open multiple buffers
 filetype off
 syntax enable
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 
-" Automatic reloading of .nvimrc
-autocmd! bufwritepost nvimrc source %
+set conceallevel=0 " To see `` in markdown files
 
 " To use mouse
 set mouse=a
@@ -23,34 +23,28 @@ set backspace=indent,eol,start
 " Indentation
 set smartindent
 
+" Tabs
 set tabstop=2
 set shiftwidth=2
 set expandtab
-
-" Set mapleader to comma
-let mapleader = ','
+set smarttab
 
 " Make files should use tabs instead of spaces
 autocmd FileType make setlocal noexpandtab
 
+" Set mapleader to comma
+let mapleader = ','
+
 " Cursor
 set cursorline
 
-" Highlight searched word
+" Searching
 set incsearch
-
-" Ignore case
 set ignorecase
 set smartcase
 
 " Show vertical line on 120 column
 set colorcolumn=121
-
-" GUI options
-set guioptions+=LlRrb
-set guioptions-=LlRrb
-
-set hidden
 
 " Always show the bar on right (sign column)
 set signcolumn=yes
@@ -70,7 +64,7 @@ autocmd InsertLeave * set number relativenumber
 " --------------------------------------------------
 " PUGINS
 " --------------------------------------------------
-"
+
 call plug#begin('~/.vim/plugged')
 
 " Coc completion and others
@@ -96,13 +90,9 @@ Plug 'mhinz/vim-startify'
 " Devicons
 Plug 'ryanoasis/vim-devicons'
 " Color schemes
-Plug 'phanviet/vim-monokai-pro'
-Plug 'arcticicestudio/nord-vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
 Plug 'reedes/vim-colors-pencil'
-Plug 'liuchengxu/space-vim-dark'
 
 call plug#end()
 
@@ -112,12 +102,13 @@ call plug#end()
 
 " Color scheme
 colorscheme gruvbox
-let g:gruvbox_contrast_dark='medium'
 set background=dark
+let g:gruvbox_contrast_dark='medium'
 
 " Airline configuration
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " NERD Commenter configuration
 let g:NERDSpaceDelims = 1
@@ -125,7 +116,6 @@ let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
-
 
 " Startify config
 let g:startify_change_to_vcs_root = 1
@@ -142,6 +132,10 @@ let s:startify_ascii_header = [
  \]
 let g:startify_custom_header = map(s:startify_ascii_header +
         \ startify#fortune#quote(), '"   ".v:val')
+
+" Recomended by coc
+set nobackup
+set nowritebackup
 
 " CoC plugins
 let g:coc_global_extensions = [
@@ -163,13 +157,13 @@ let g:coc_global_extensions = [
       \ 'coc-stylelint',
       \ 'coc-snippets',
       \ 'coc-sql',
+      \ 'coc-fzf-preview',
       \ 'coc-xml',
       \ 'coc-yaml',
-      \ 'coc-fzf-preview',
       \ 'coc-yank',
-      \ 'coc-jest',
-      \ 'coc-pairs'
+      \ 'coc-jest'
       \]
+
 
 "Coc configuration
 function! s:show_documentation()
@@ -191,17 +185,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " MAPPING
 " --------------------------------------------------
 
-" Easy sorting of selected lines
-vnoremap <leader>s :sort<CR>
-
 " Bind copy to clipboard
 map <leader>cp "+y
-
-" Bind Ctrl + [h,j,k,l] for quick window movement
-map <c-h> <c-w>h
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
 
 " Remove trailing spaces
 nmap <leader><space> :%s/\s\+$<cr>
@@ -239,10 +224,6 @@ endif
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -280,6 +261,7 @@ nmap <space>e :CocCommand explorer<CR>
 nmap <space>p :CocCommand fzf-preview.ProjectFiles<cr>
 nmap <leader>b :CocCommand fzf-preview.Buffers<cr>
 nmap <leader>gs :CocCommand fzf-preview.GitStatus<cr>
+nmap <leader>ga :CocCommand fzf-preview.GitActions<cr>
 nmap <leader>ff :Files<cr>
 nmap <leader>ag :Ag<cr>
 
@@ -301,5 +283,6 @@ nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 " Which key configuration
 nnoremap <silent> <space> :WhichKey '<Space>'<CR>
 nnoremap <silent> <leader> :WhichKey '<leader>'<CR>
+
 " By default timeoutlen is 1000 ms
 set timeoutlen=200
