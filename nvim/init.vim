@@ -87,6 +87,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'liuchengxu/vim-which-key'
 " Starting page
 Plug 'mhinz/vim-startify'
+" Tabular 
+Plug 'godlygeek/tabular'
 " Devicons
 Plug 'ryanoasis/vim-devicons'
 " Color schemes
