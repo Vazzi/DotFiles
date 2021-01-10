@@ -32,5 +32,6 @@
   "prettier.tabWidth": 2,
   "prettier.jsxSingleQuote": false,
   "prettier.jsxBracketSameLine": false,
-  "prettier.eslintIntegration": true
+  "prettier.eslintIntegration": true,
+  "prettier.onlyUseLocalVersion": true
 }
