@@ -140,11 +140,15 @@ set nobackup
 set nowritebackup
 
 " CoC plugins
+"   List of available extensions:
+"     https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#implemented-coc-extensions
 let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-git',
       \ 'coc-css',
       \ 'coc-cssmodules',
+      \ 'coc-swagger',
+      \ 'coc-lists',
       \ 'coc-html',
       \ 'coc-tsserver',
       \ 'coc-eslint',
@@ -155,8 +159,6 @@ let g:coc_global_extensions = [
       \ 'coc-markdownlint',
       \ 'coc-python',
       \ 'coc-sh',
-      \ 'coc-stylelintplus',
-      \ 'coc-stylelint',
       \ 'coc-snippets',
       \ 'coc-sql',
       \ 'coc-fzf-preview',
@@ -182,6 +184,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Use if you want to have colorfull FZF preview
 " let g:fzf_preview_command = 'bat --theme=gruvbox --color=always --plain {-1}'
+
+" By default timeoutlen is 1000 ms
+set timeoutlen=200
 
 " --------------------------------------------------
 " MAPPING
@@ -246,31 +251,31 @@ vmap <c-j> <Plug>(coc-snippets-select)
 nmap <leader>qf  <Plug>(coc-fix-current)
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Format prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 nmap <leader>f  :CocCommand prettier.formatFile<CR>
-nmap <leader>fe  :CocCommand eslint.executeAutofix<CR>
 
 " Open coc explorer
 nmap <space>e :CocCommand explorer<CR>
 
-" Open FZF
+" Open FZF-preview
 nmap <space>p :CocCommand fzf-preview.ProjectFiles<cr>
-nmap <leader>b :CocCommand fzf-preview.Buffers<cr>
-nmap <leader>gs :CocCommand fzf-preview.GitStatus<cr>
-nmap <leader>ga :CocCommand fzf-preview.GitActions<cr>
-nmap <leader>ff :Files<cr>
-nmap <leader>ag :Ag<cr>
+nmap <space>b :CocCommand fzf-preview.Buffers<cr>
 
 " CocList
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>l  :<C-u>CocList<cr>
+nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -A snippets<cr>
+nnoremap <silent><nowait> <space>y  :<C-u>CocList -A --normal yank<cr>
+
+" Git commands
+nnoremap <silent><nowait> <leader>g  :<C-u>G<cr>
+nnoremap <silent><nowait> <leader>gi  :<C-u>CocCommand git.chunkInfo<cr>
+nnoremap <silent><nowait> <leader>gu  :<C-u>CocCommand git.chunkUndo<cr>
+nnoremap <silent><nowait> <leader>gs  :<C-u>CocCommand git.chunkStage<cr>
 
 " Colors
 nmap <leader>pc :call CocAction('pickColor')<CR>
@@ -279,12 +284,9 @@ nmap <leader>pcp :call CocAction('colorPresentation')<CR>
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Show yank
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-
 " Which key configuration
 nnoremap <silent> <space> :WhichKey '<Space>'<CR>
 nnoremap <silent> <leader> :WhichKey '<leader>'<CR>
 
-" By default timeoutlen is 1000 ms
-set timeoutlen=200
+" Show current file in Chrome. Works only in MacOS. Used for Markdown preview.
+nnoremap <silent><nowait> <leader>mp :!open -a "Google Chrome.app" %<cr>
