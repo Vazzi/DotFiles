@@ -2,15 +2,20 @@
   "explorer.icon.enableNerdfont": true,
   "explorer.position": "left",
   "explorer.quitOnOpen": true,
-  "explorer.activeMode": true,
+  "explorer.buffer.showHiddenBuffers": true,
+  "explorer.file.showHiddenFiles": true,
+  "explorer.file.git.showUntrackedFiles":true,
 
   "highlight.colors.enable": true,
   "highlight.document.enable": true,
   "highlight.colorNames.enable": true,
 
+  "list.source.mru.ignoreGitIgnore": true,
+  
+  "emmet.includeLanguages": {"javascript": "javascriptreact", "typescript": "typescriptreact"},
+
   "coc.preferences.colorSupport": true,
   "coc.preferences.useQuickfixForLocations": true,
-  "coc.preferences.snippets.enable": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "python",
     "javascript",

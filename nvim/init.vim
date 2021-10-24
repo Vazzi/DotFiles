@@ -1,3 +1,4 @@
+syntax on
 set nocompatible
 
 set hidden " Required to keep multiple buffers open multiple buffers
@@ -24,10 +25,13 @@ set backspace=indent,eol,start
 set smartindent
 
 " Tabs
-set tabstop=2
+set tabstop=2 softtabstop=2
 set shiftwidth=2
 set expandtab
 set smarttab
+
+" No highlight
+set nohlsearch
 
 " Make files should use tabs instead of spaces
 autocmd FileType make setlocal noexpandtab
@@ -54,7 +58,6 @@ set ruler
 
 " Set relative numbers with current line number on cursor line
 set relativenumber
-set number
 
 " Switch to absolute numbers in Insert mode
 autocmd InsertEnter * set number norelativenumber
@@ -87,14 +90,18 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'liuchengxu/vim-which-key'
 " Starting page
 Plug 'mhinz/vim-startify'
-" Tabular 
+" Tabular
 Plug 'godlygeek/tabular'
+" Cheat.sh
+Plug 'dbeniamine/cheat.sh-vim'
 " Devicons
 Plug 'ryanoasis/vim-devicons'
+" Surounding brackets
+Plug 'tpope/vim-surround'
+" UndoTreee
+Plug 'mbbill/undotree'
 " Color schemes
-Plug 'morhetz/gruvbox'
-Plug 'joshdick/onedark.vim'
-Plug 'reedes/vim-colors-pencil'
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
@@ -103,9 +110,8 @@ call plug#end()
 " --------------------------------------------------
 
 " Color scheme
-colorscheme gruvbox
+colorscheme nord
 set background=dark
-let g:gruvbox_contrast_dark='medium'
 
 " Airline configuration
 let g:airline#extensions#tabline#enabled = 1
@@ -165,7 +171,10 @@ let g:coc_global_extensions = [
       \ 'coc-xml',
       \ 'coc-yaml',
       \ 'coc-yank',
-      \ 'coc-jest'
+      \ 'coc-jest',
+      \ 'coc-emmet',
+      \ 'coc-terminal',
+      \ 'coc-pairs'
       \]
 
 
@@ -183,10 +192,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Use if you want to have colorfull FZF preview
-" let g:fzf_preview_command = 'bat --theme=gruvbox --color=always --plain {-1}'
-
-" By default timeoutlen is 1000 ms
-set timeoutlen=200
+let g:fzf_preview_command = 'bat --theme=Nord --color=always --plain {-1}'
 
 " --------------------------------------------------
 " MAPPING
@@ -201,6 +207,15 @@ nmap <leader><space> :%s/\s\+$<cr>
 " Better indenting of code block
 vnoremap < <gv
 vnoremap > >gv
+
+" Moving selected lines up or down
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Keeping it centered
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
 
 " Reload config file
 nmap <leader>r :source ~/.config/nvim/init.vim<CR>
@@ -272,9 +287,11 @@ nnoremap <silent><nowait> <space>s  :<C-u>CocList -A snippets<cr>
 nnoremap <silent><nowait> <space>y  :<C-u>CocList -A --normal yank<cr>
 
 " Git commands
-nnoremap <silent><nowait> <leader>g  :<C-u>G<cr>
+nnoremap <space>g  :<C-u>Git<cr>
+nnoremap <space>k  :<C-u>Git commit<cr>
+nnoremap <space>K  :<C-u>Git push<cr>
 nnoremap <silent><nowait> <leader>gi  :<C-u>CocCommand git.chunkInfo<cr>
-nnoremap <silent><nowait> <leader>gu  :<C-u>CocCommand git.chunkUndo<cr>
+nnoremap <silent><nowait> <leader>gr  :<C-u>CocCommand git.chunkUndo<cr>
 nnoremap <silent><nowait> <leader>gs  :<C-u>CocCommand git.chunkStage<cr>
 
 " Colors
@@ -283,10 +300,14 @@ nmap <leader>pcp :call CocAction('colorPresentation')<CR>
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 
 " Which key configuration
 nnoremap <silent> <space> :WhichKey '<Space>'<CR>
 nnoremap <silent> <leader> :WhichKey '<leader>'<CR>
 
 " Show current file in Chrome. Works only in MacOS. Used for Markdown preview.
-nnoremap <silent><nowait> <leader>mp :!open -a "Google Chrome.app" %<cr>
+nmap <leader>mp :!open -a "Google Chrome.app" %<cr>
+
+" Show Undotree
+nnoremap <silent><nowait> <space>u :UndotreeToggle<CR>
