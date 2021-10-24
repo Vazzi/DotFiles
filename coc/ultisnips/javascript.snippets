@@ -68,3 +68,23 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(${3});
 endsnippet
+
+snippet lmf "Messages file for localizaon" b
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  ${1}: {
+    id: '${2}',
+    description: '${3}'
+  }
+});
+
+export default messages;
+endsnippet
+
+snippet lmo "Messages object for localization"
+${1}: {
+  id: '${2}',
+  description: '${3}'
+}
+endsnippet
