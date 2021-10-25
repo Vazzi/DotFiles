@@ -12,16 +12,16 @@
 	diffc = diff --cached
 	dt = difftool
 [diff]
-    tool = nvimdiff
-    noprefix = true
-    renames = copies
+  tool = nvimdiff
+  noprefix = true
+  renames = copies
 [difftool]
-    prompt = true
+  prompt = true
 [difftool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [merge]
-    tool = vimdiff
+  tool = vimdiff
 [mergetool "vimdiff"]
-    path = nvim
+  path = nvim
 [init]
 	defaultBranch = master
