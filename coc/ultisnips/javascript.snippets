@@ -88,3 +88,73 @@ ${1}: {
   description: '${3}'
 }
 endsnippet
+
+snippet trc "Test react component" b
+import React from 'react';
+import { shallow } from 'enzyme';
+
+import ${1} from './${1}';
+
+describe('<${1} /> component', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<${1} />);
+  });
+
+  describe('renders', () => {
+    ${2}
+  });
+});
+endsnippet
+
+snippet trcp "Test react component with props" b
+import React from 'react';
+import { shallow } from 'enzyme';
+
+import ${1} from './${1}';
+
+describe('<${1} /> component', () => {
+  let wrapper;
+  let props;
+
+  beforeEach(() => {
+    props = {
+      ${2}
+    }
+
+    wrapper = shallow(<${1} {...props} />);
+  });
+
+  describe('renders', () => {
+    ${3}
+  });
+});
+endsnippet
+
+snippet te "Test except"
+it('${1}', () => {
+  expect(${2});
+});
+endsnippet
+
+snippet td "Test describe"
+describe('${1}', () => {
+  it('${2}', () => {
+    expect(${3});
+  });
+});
+endsnippet
+
+snippet imui "Import Material UI component" bA
+import ${1} from '@mui/material/${1}';
+endsnippet
+
+snippet jsdrp "JsDoc react param of props" A
+@param {object} props React component props
+* @param {${1}} props.${2}
+endsnippet
+
+snippet jsdp "JsDoc param" A
+@param {${1}} props.${2}
+endsnippet
