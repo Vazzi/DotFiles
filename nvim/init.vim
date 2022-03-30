@@ -74,6 +74,8 @@ Plug 'tpope/vim-surround'
 Plug 'mbbill/undotree'
 " Indentation lines
 Plug 'Yggdroot/indentline'
+" Debugging Vimspector
+Plug 'puremourning/vimspector'
 " Color schemes
 Plug 'arcticicestudio/nord-vim'
 Plug 'lifepillar/vim-solarized8'
@@ -176,6 +178,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Use if you want to have colorfull FZF preview
 let g:fzf_preview_command = 'bat --theme="Solarized (light)" --color=always --plain {-1}'
+
+" Vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
 
 " --------------------------------------------------
 " MAPPING
@@ -291,3 +296,12 @@ nmap <leader>mp :!open -a "Google Chrome.app" %<cr>
 
 " Show Undotree
 nnoremap <silent><nowait> <space>u :Und (light)"otreeToggle<CR>
+
+" Vimspector
+" For normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" For visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
+" Close 
+nnoremap <silent><nowait> <leader>dr :VimspectorReset<cr>
+
