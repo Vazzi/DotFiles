@@ -120,10 +120,7 @@ let g:startify_custom_header = map(s:startify_ascii_header +
 let g:startify_bookmarks = [
       \ '~/Developer/',
       \ '~/Developer/Typescript/',
-      \ '~/Developer/Work/CEZ/',
-      \ '~/Developer/Work/CEZ/Portaly/Sharedesk/sharedesk-fe',
-      \ '~/Developer/Work/CEZ/Infra/ServiceCatalog/service-portal-fe',
-      \ '~/Developer/Work/CEZ/Digihub/IoT Dashboard/iot-dashboard-fe',
+      \ '~/Developer/Work/'
       \]
 
 " Recomended by coc
@@ -239,6 +236,7 @@ nmap <silent> gd :CocCommand fzf-preview.CocDefinition<cr>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr :CocCommand fzf-preview.CocReferences<cr>
+nmap <silent> gb :CocList branches<cr>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
