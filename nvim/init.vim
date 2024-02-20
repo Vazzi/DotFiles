@@ -60,6 +60,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Sync Tmux and Nvim line
 Plug 'edkolev/tmuxline.vim'
+" Tmux navigation
+Plug 'christoomey/vim-tmux-navigator'
 " Starting page
 Plug 'mhinz/vim-startify'
 " Tabular
@@ -79,6 +81,7 @@ Plug 'puremourning/vimspector'
 " Color schemes
 Plug 'arcticicestudio/nord-vim'
 Plug 'lifepillar/vim-solarized8'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()
 
@@ -87,8 +90,8 @@ call plug#end()
 " --------------------------------------------------
 
 " Color scheme
-colorscheme solarized8
-set background=light
+colorscheme dracula
+set background=dark
 
 " Airline configuration
 let g:airline#extensions#tabline#enabled = 1
@@ -174,7 +177,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Use if you want to have colorfull FZF preview
-let g:fzf_preview_command = 'bat --theme="Solarized (light)" --color=always --plain {-1}'
+let g:fzf_preview_command = 'bat --theme="Dracula" --color=always --plain {-1}'
 
 " Vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
@@ -303,3 +306,11 @@ xmap <Leader>di <Plug>VimspectorBalloonEval
 " Close 
 nnoremap <silent><nowait> <leader>dr :VimspectorReset<cr>
 
+
+" Tmux mapping
+let g:tmux_navigator_no_mappings = 1
+
+noremap <silent> <C-h> :<C-U>TmuxNavigateLeft<cr>
+noremap <silent> <C-j> :<C-U>TmuxNavigateDown<cr>
+noremap <silent> <C-k> :<C-U>TmuxNavigateUp<cr>
+noremap <silent> <C-l> :<C-U>TmuxNavigateRight<cr>

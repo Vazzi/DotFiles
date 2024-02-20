@@ -44,5 +44,6 @@
   "prettier.semi": true,
   "prettier.singleQuote": true,
   "prettier.tabWidth": 2,
-  "prettier.jsxSingleQuote": false
+  "prettier.jsxSingleQuote": false,
+  "snippets.ultisnips.pythonPrompt": false
 }

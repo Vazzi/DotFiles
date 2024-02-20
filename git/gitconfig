@@ -1,6 +1,6 @@
 [user]
 	name = Jakub Vlasák
-	email = vlasakjakub@gmail.com
+	email = jakub.vlasak@cez.cz
 [core]
 	excludesfile = /Users/Vazzi/.gitignore_global
 	editor = nvim
