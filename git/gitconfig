@@ -1,8 +1,8 @@
 [user]
 	name = Jakub Vlasák
-	email = jakub.vlasak@cez.cz
+	email = vlasakjakub@gmail.com
 [core]
-	excludesfile = /Users/Vazzi/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = nvim
 [push]
 	default = simple
@@ -23,5 +23,3 @@
   tool = vimdiff
 [mergetool "vimdiff"]
   path = nvim
-[init]
-	defaultBranch = master
