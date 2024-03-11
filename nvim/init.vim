@@ -41,33 +41,32 @@ let mapleader = ','
 " --------------------------------------------------
 
 call plug#begin('~/.vim/plugged')
-
 " Tmux navigation
 Plug 'christoomey/vim-tmux-navigator'
 " Color schemes
 Plug 'dracula/vim', { 'as': 'dracula' }
 " UndoTreee
 Plug 'mbbill/undotree'
-
-" Commenting
-Plug 'scrooloose/nerdcommenter'
-" Syntax highlight
-Plug 'sheerun/vim-polyglot'
 " Git integration
 Plug 'tpope/vim-fugitive'
-" Airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Git signs
+Plug 'lewis6991/gitsigns.nvim'
+" Lualine is a fancy and blazingly fast statusbar
+Plug 'nvim-lualine/lualine.nvim'
+" DevIcons for lualine
+Plug 'nvim-tree/nvim-web-devicons'
+
+" ------- Optional --------
 " Starting page
 Plug 'mhinz/vim-startify'
+
+" ------- I dont know --------
+" Syntax highlight
+" Plug 'sheerun/vim-polyglot'
+" Commenting
+" Plug 'scrooloose/nerdcommenter'
 " Tabular
-Plug 'godlygeek/tabular'
-" Devicons
-Plug 'ryanoasis/vim-devicons'
-" Surounding brackets
-Plug 'tpope/vim-surround'
-" Indentation lines
-Plug 'Yggdroot/indentline'
+" Plug 'godlygeek/tabular'
 
 call plug#end()
 
@@ -75,14 +74,12 @@ call plug#end()
 " PUGINS configuration
 " --------------------------------------------------
 
+" Transparent background color
+let g:dracula_colorterm = 0
+
 " Color scheme
 colorscheme dracula
 set background=dark
-
-" Airline configuration
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " NERD Commenter configuration
 let g:NERDSpaceDelims = 1
@@ -94,30 +91,22 @@ let g:NERDTrimTrailingWhitespace = 1
 " Startify config
 let g:startify_change_to_vcs_root = 1
 let s:startify_ascii_header = [
-      \ ' /$$   /$$                     /$$    /$$ /$$$$$$ /$$      /$$',
-      \ '| $$$ | $$                    | $$   | $$|_  $$_/| $$$    /$$$',
-      \ '| $$$$| $$  /$$$$$$   /$$$$$$ | $$   | $$  | $$  | $$$$  /$$$$',
-      \ '| $$ $$ $$ /$$__  $$ /$$__  $$|  $$ / $$/  | $$  | $$ $$/$$ $$',
-      \ '| $$  $$$$| $$$$$$$$| $$  \ $$ \  $$ $$/   | $$  | $$  $$$| $$',
-      \ '| $$\  $$$| $$_____/| $$  | $$  \  $$$/    | $$  | $$\  $ | $$',
-      \ '| $$ \  $$|  $$$$$$$|  $$$$$$/   \  $/    /$$$$$$| $$ \/  | $$',
-      \ '|__/  \__/ \_______/ \______/     \_/    |______/|__/     |__/',
-      \ '',
-      \]
+     \ ' /$$   /$$                     /$$    /$$ /$$$$$$ /$$      /$$',
+     \ '| $$$ | $$                    | $$   | $$|_  $$_/| $$$    /$$$',
+     \ '| $$$$| $$  /$$$$$$   /$$$$$$ | $$   | $$  | $$  | $$$$  /$$$$',
+     \ '| $$ $$ $$ /$$__  $$ /$$__  $$|  $$ / $$/  | $$  | $$ $$/$$ $$',
+     \ '| $$  $$$$| $$$$$$$$| $$  \ $$ \  $$ $$/   | $$  | $$  $$$| $$',
+     \ '| $$\  $$$| $$_____/| $$  | $$  \  $$$/    | $$  | $$\  $ | $$',
+     \ '| $$ \  $$|  $$$$$$$|  $$$$$$/   \  $/    /$$$$$$| $$ \/  | $$',
+     \ '|__/  \__/ \_______/ \______/     \_/    |______/|__/     |__/',
+     \ '',
+     \]
 let g:startify_custom_header = map(s:startify_ascii_header +
-        \ startify#fortune#quote(), '"   ".v:val')
+       \ startify#fortune#quote(), '"   ".v:val')
 let g:startify_bookmarks = [
-      \ '~/Developer/',
-      \ '~/Developer/Typescript/',
-      \ '~/Developer/Work/'
-      \]
-
-" Recomended by coc
-set nobackup
-set nowritebackup
-
-" Vimspector
-let g:vimspector_enable_mappings = 'HUMAN'
+     \ '~/Developer/',
+     \ '~/Developer/Typescript/',
+     \]
 
 " --------------------------------------------------
 " MAPPING
@@ -145,16 +134,16 @@ nnoremap J mzJ`z
 " Reload config file
 nmap <leader>r :source ~/.config/nvim/init.vim<CR>
 
-" Git commands
-nnoremap <space>g  :<C-u>Git<cr>
-nnoremap <space>gp  :<C-u>Git push<cr>
-nnoremap <space>gc  :<C-u>Git checkout 
-
 " Show current file in Chrome. Works only in MacOS. Used for Markdown preview.
 nmap <leader>mp :!open -a "Google Chrome.app" %<cr>
 
+" Git commands
+nnoremap <space>g  :<C-u>Git<cr>
+nnoremap <space>gp  :<C-u>Git push<cr>
+nnoremap <space>gc  :<C-u>Git checkout
+
 " Show Undotree
-nnoremap <silent><nowait> <space>u :Und (light)"otreeToggle<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
 
 " Tmux mapping
 let g:tmux_navigator_no_mappings = 1
@@ -162,3 +151,49 @@ noremap <silent> <C-h> :<C-U>TmuxNavigateLeft<cr>
 noremap <silent> <C-j> :<C-U>TmuxNavigateDown<cr>
 noremap <silent> <C-k> :<C-U>TmuxNavigateUp<cr>
 noremap <silent> <C-l> :<C-U>TmuxNavigateRight<cr>
+
+" Enable LuaLine
+lua<<EOF
+  require('lualine').setup { }
+  require('gitsigns').setup {
+    on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map('n', ']c', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    map('n', '[c', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    -- Actions
+    map('n', '<leader>hs', gs.stage_hunk)
+    map('n', '<leader>hr', gs.reset_hunk)
+    map('v', '<leader>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+    map('v', '<leader>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+    map('n', '<leader>hS', gs.stage_buffer)
+    map('n', '<leader>hu', gs.undo_stage_hunk)
+    map('n', '<leader>hR', gs.reset_buffer)
+    map('n', '<leader>hp', gs.preview_hunk)
+    map('n', '<leader>hb', function() gs.blame_line{full=true} end)
+    map('n', '<leader>hd', gs.diffthis)
+    map('n', '<leader>hD', function() gs.diffthis('~') end)
+    map('n', '<leader>td', gs.toggle_deleted)
+
+    -- Text object
+    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+  end
+  }
+EOF
