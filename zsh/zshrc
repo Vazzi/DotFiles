@@ -30,6 +30,9 @@ else
   export EDITOR='nvim'
 fi
 
+# Aliases
+alias v="nvim"
+
 # Source Oh-my-zsh - https://github.com/ohmyzsh/ohmyzsh
 source $ZSH/oh-my-zsh.sh
 
