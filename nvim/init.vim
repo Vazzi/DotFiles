@@ -41,33 +41,24 @@ let mapleader = ','
 " --------------------------------------------------
 
 call plug#begin('~/.vim/plugged')
-" Tmux navigation
-Plug 'christoomey/vim-tmux-navigator'
-" Color schemes
-Plug 'dracula/vim', { 'as': 'dracula' }
-" UndoTreee
-Plug 'mbbill/undotree'
-" Git integration
-Plug 'tpope/vim-fugitive'
-" Git signs
-Plug 'lewis6991/gitsigns.nvim'
-" Lualine is a fancy and blazingly fast statusbar
-Plug 'nvim-lualine/lualine.nvim'
-" DevIcons for lualine
-Plug 'nvim-tree/nvim-web-devicons'
 
-" ------- Optional --------
-" Starting page
-Plug 'mhinz/vim-startify'
+  " Telescope
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+  " Color schemes
+  Plug 'dracula/vim', { 'as': 'dracula' }
+  " Git integration with gitsigns
+  Plug 'tpope/vim-fugitive'
+  Plug 'lewis6991/gitsigns.nvim'
+  " Lualine is a fancy and blazingly fast statusbar with devicons
+  Plug 'nvim-lualine/lualine.nvim'
+  Plug 'nvim-tree/nvim-web-devicons'
+  " Tmux navigation
+  Plug 'christoomey/vim-tmux-navigator'
 
-" ------- I dont know --------
-" Syntax highlight
-" Plug 'sheerun/vim-polyglot'
-" Commenting
-" Plug 'scrooloose/nerdcommenter'
-" Tabular
-" Plug 'godlygeek/tabular'
-
+  " ------- Optional --------
+  " UndoTreee
+  Plug 'mbbill/undotree'
 call plug#end()
 
 " --------------------------------------------------
@@ -80,33 +71,6 @@ let g:dracula_colorterm = 0
 " Color scheme
 colorscheme dracula
 set background=dark
-
-" NERD Commenter configuration
-let g:NERDSpaceDelims = 1
-let g:NERDCompactSexyComs = 1
-let g:NERDDefaultAlign = 'left'
-let g:NERDCommentEmptyLines = 1
-let g:NERDTrimTrailingWhitespace = 1
-
-" Startify config
-let g:startify_change_to_vcs_root = 1
-let s:startify_ascii_header = [
-     \ ' /$$   /$$                     /$$    /$$ /$$$$$$ /$$      /$$',
-     \ '| $$$ | $$                    | $$   | $$|_  $$_/| $$$    /$$$',
-     \ '| $$$$| $$  /$$$$$$   /$$$$$$ | $$   | $$  | $$  | $$$$  /$$$$',
-     \ '| $$ $$ $$ /$$__  $$ /$$__  $$|  $$ / $$/  | $$  | $$ $$/$$ $$',
-     \ '| $$  $$$$| $$$$$$$$| $$  \ $$ \  $$ $$/   | $$  | $$  $$$| $$',
-     \ '| $$\  $$$| $$_____/| $$  | $$  \  $$$/    | $$  | $$\  $ | $$',
-     \ '| $$ \  $$|  $$$$$$$|  $$$$$$/   \  $/    /$$$$$$| $$ \/  | $$',
-     \ '|__/  \__/ \_______/ \______/     \_/    |______/|__/     |__/',
-     \ '',
-     \]
-let g:startify_custom_header = map(s:startify_ascii_header +
-       \ startify#fortune#quote(), '"   ".v:val')
-let g:startify_bookmarks = [
-     \ '~/Developer/',
-     \ '~/Developer/Typescript/',
-     \]
 
 " --------------------------------------------------
 " MAPPING
@@ -138,9 +102,9 @@ nmap <leader>r :source ~/.config/nvim/init.vim<CR>
 nmap <leader>mp :!open -a "Google Chrome.app" %<cr>
 
 " Git commands
-nnoremap <space>g  :<C-u>Git<cr>
-nnoremap <space>gp  :<C-u>Git push<cr>
-nnoremap <space>gc  :<C-u>Git checkout
+nnoremap <leader>g   :<C-u>Git<cr>
+nnoremap <leader>gp  :<C-u>Git push<cr>
+nnoremap <leader>gc  :<C-u>Git checkout
 
 " Show Undotree
 nnoremap <leader>u :UndotreeToggle<CR>
@@ -152,9 +116,19 @@ noremap <silent> <C-j> :<C-U>TmuxNavigateDown<cr>
 noremap <silent> <C-k> :<C-U>TmuxNavigateUp<cr>
 noremap <silent> <C-l> :<C-U>TmuxNavigateRight<cr>
 
-" Enable LuaLine
+" Telescope mapping
+nnoremap <leader>o  <cmd>lua require('telescope.builtin').git_files()<cr>
+nnoremap <leader>of <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>og <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>ob <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>oh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
+
 lua<<EOF
+  --  Enable LuaLine
   require('lualine').setup { }
+
+  -- Enable Gitsigns and config
   require('gitsigns').setup {
     on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
