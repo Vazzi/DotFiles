@@ -45,11 +45,14 @@ call plug#begin('~/.vim/plugged')
   " Telescope
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+
   " LSP
   Plug 'j-hui/fidget.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
+
+  " Formatter 
   Plug 'mhartington/formatter.nvim'
 
   " Color schemes
@@ -66,9 +69,6 @@ call plug#begin('~/.vim/plugged')
   " ------- Optional --------
   " UndoTreee
   Plug 'mbbill/undotree'
-
-  " Clever tabular
-"  Plug 'godlygeek/tabular'
 
 call plug#end()
 
