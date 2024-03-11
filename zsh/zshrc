@@ -33,6 +33,11 @@ fi
 # Aliases
 alias v="nvim"
 
+alias gs="git status"
+alias ga="git add ."
+alias gcm="git commit -m "
+alias gp="git push"
+
 # Source Oh-my-zsh - https://github.com/ohmyzsh/ohmyzsh
 source $ZSH/oh-my-zsh.sh
 
