@@ -15,13 +15,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<Leader>cn', vim.lsp.buf.rename, opts)
   vim.keymap.set('n', '<Leader>h', vim.lsp.buf.hover, opts)
 
-  -- Set some keybinds conditional on server capabilities
-  if client.server_capabilities.document_formatting then
-    vim.keymap.set("n", "<Leader>F", vim.lsp.buf.formatting, opts)
-  end
-  if client.server_capabilities.document_range_formatting then
-    vim.keymap.set("v", "<Leader>F", vim.lsp.buf.range_formatting, opts)
-  end
 end
 
 lspconfig.tsserver.setup {
@@ -30,6 +23,51 @@ lspconfig.tsserver.setup {
   cmd = { "typescript-language-server", "--stdio" },
   capabilities = capabilities,
 }
+
+lspconfig.diagnosticls.setup {
+  filetypes = {"javascript", "javascriptreact", "typescript", "typescriptreact", "css"},
+  init_options = {
+    filetypes = {
+      javascript = "eslint",
+      typescript = "eslint",
+      javascriptreact = "eslint",
+      typescriptreact = "eslint"
+    },
+    linters = {
+      eslint = {
+        sourceName = "eslint",
+        command = "./node_modules/.bin/eslint",
+        rootPatterns = {
+          ".eslitrc.js",
+          "package.json"
+        },
+        debounce = 100,
+        args = {
+          "--cache",
+          "--stdin",
+          "--stdin-filename",
+          "%filepath",
+          "--format",
+          "json"
+        },
+        parseJson = {
+          errorsRoot = "[0].messages",
+          line = "line",
+          column = "column",
+          endLine = "endLine",
+          endColumn = "endColumn",
+          message = "${message} [${ruleId}]",
+          security = "severity"
+        },
+        securities = {
+          [2] = "error",
+          [1] = "warning"
+        }
+      }
+    }
+  }
+}
+
 
 lspconfig.lua_ls.setup {
   on_attach = on_attach,

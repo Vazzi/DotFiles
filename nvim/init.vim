@@ -50,6 +50,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'mhartington/formatter.nvim'
 
   " Color schemes
   Plug 'dracula/vim', { 'as': 'dracula' }
@@ -112,7 +113,7 @@ nmap <leader>r :source ~/.config/nvim/init.vim<CR>
 nmap <leader>mp :!open -a "Google Chrome.app" %<cr>
 
 " Git commands
-nnoremap <leader>g   :<C-u>Git<cr>
+nnoremap <space>g   :<C-u>Git<cr>
 nnoremap <leader>gp  :<C-u>Git push<cr>
 nnoremap <leader>gc  :<C-u>Git checkout
 
@@ -127,12 +128,16 @@ noremap <silent> <C-k> :<C-U>TmuxNavigateUp<cr>
 noremap <silent> <C-l> :<C-U>TmuxNavigateRight<cr>
 
 " Telescope mapping
-nnoremap <leader>o  <cmd>lua require('telescope.builtin').git_files()<cr>
+nnoremap <space>o  <cmd>lua require('telescope.builtin').git_files()<cr>
 nnoremap <leader>of <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>og <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>ob <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>oh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
+
+" Formatter
+nnoremap <silent> <leader>f :Format<CR>
+nnoremap <silent> <leader>F :FormatWrite<CR>
 
 
 lua<<EOF
@@ -142,10 +147,8 @@ lua<<EOF
   --  Enable Fidget
   require("fidget").setup { }
 
-  --  Import LSP config setup
   require('plugins.lsp')
-
-  --  Import Gitsings setup 
+  require('plugins.formatter')
   require('plugins.gitsigns')
 
   -- Leave buffer after select
