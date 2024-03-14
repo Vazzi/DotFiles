@@ -3,12 +3,13 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
 
+# FZF settings
 export FZF_CTRL_T_OPTS="
   --walker-skip .git,node_modules,target
   --preview 'bat -n --color=always --theme Dracula {}'
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
-
 export FZF_ALT_C_OPTS=" --walker-skip .git,node_modules,target,Library"
+export FZF_TMUX_OPTS='-p80%,60%'
 
 # Node Version Manager - https://github.com/nvm-sh/nvm
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
