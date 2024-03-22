@@ -8,7 +8,9 @@ export FZF_CTRL_T_OPTS="
   --walker-skip .git,node_modules,target
   --preview 'bat -n --color=always --theme Dracula {}'
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
-export FZF_ALT_C_OPTS=" --walker-skip .git,node_modules,target,Library"
+export FZF_ALT_C_OPTS="
+  --walker-skip .git,node_modules,target,Library
+  --preview 'tree -L 2 -C {}'"
 export FZF_TMUX_OPTS='-p80%,60%'
 
 # Node Version Manager - https://github.com/nvm-sh/nvm
