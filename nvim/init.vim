@@ -33,6 +33,9 @@ set smartcase
 " Make files should use tabs instead of spaces
 autocmd FileType make setlocal noexpandtab
 
+" Jenkinsfiles are groovy type
+autocmd BufRead,BufNewFile Jenkinsfile* set filetype=groovy
+
 " Set mapleader to comma
 let mapleader = ','
 
