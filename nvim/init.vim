@@ -47,27 +47,50 @@ call plug#begin('~/.vim/plugged')
 
   " Telescope
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+  Plug 'nvim-telescope/telescope-ui-select.nvim'
+
+  " Harpoon - A bookmarking plugin for Neovim
+  Plug 'ThePrimeagen/harpoon', { 'branch': 'harpoon2' }
+
+  " Treesitter - for better syntax highlighting
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
   " LSP
-  Plug 'j-hui/fidget.nvim'
+  Plug 'j-hui/fidget.nvim' " Extensible UI for Neovim notifications and LSP progress messages.
   Plug 'neovim/nvim-lspconfig'
-  Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/nvim-cmp'
 
-  " Formatter 
+  " Trouble - LSP diagnostics, quickfix list, and location list
+  Plug 'folke/trouble.nvim'
+
+  " Colorizer
+  Plug 'norcalli/nvim-colorizer.lua'
+
+  " Formatter
   Plug 'mhartington/formatter.nvim'
 
-  " Color schemes
-  Plug 'dracula/vim', { 'as': 'dracula' }
+  " Autopairs and Autotag
+  Plug 'windwp/nvim-autopairs'
+  Plug 'windwp/nvim-ts-autotag'
+
   " Git integration with gitsigns
   Plug 'tpope/vim-fugitive'
   Plug 'lewis6991/gitsigns.nvim'
+  Plug 'tpope/vim-rhubarb'
+
   " Lualine is a fancy and blazingly fast statusbar with devicons
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'nvim-tree/nvim-web-devicons'
+
   " Tmux navigation
   Plug 'christoomey/vim-tmux-navigator'
+
+  " Copilot
+  Plug 'github/copilot.vim'
 
   " ------- Optional --------
   " UndoTreee
@@ -83,7 +106,7 @@ call plug#end()
 let g:dracula_colorterm = 0
 
 " Color scheme
-colorscheme dracula
+colorscheme Dracula_pro
 set background=dark
 
 " --------------------------------------------------
@@ -113,7 +136,7 @@ nnoremap J mzJ`z
 nmap <leader>r :source ~/.config/nvim/init.vim<CR>
 
 " Show current file in Chrome. Works only in MacOS. Used for Markdown preview.
-nmap <leader>mp :!open -a "Google Chrome.app" %<cr>
+nmap <leader>mp :!open -a "Firefox.app" %<cr>
 
 " Git commands
 nnoremap <space>g   :<C-u>Git<cr>
@@ -134,6 +157,7 @@ noremap <silent> <C-l> :<C-U>TmuxNavigateRight<cr>
 nnoremap <space>o  <cmd>lua require('telescope.builtin').git_files()<cr>
 nnoremap <leader>of <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>og <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>od <cmd>lua require('telescope.builtin').diagnostics()<cr>
 nnoremap <leader>ob <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>oh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
@@ -142,17 +166,32 @@ nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
 nnoremap <silent> <leader>f :Format<CR>
 nnoremap <silent> <leader>F :FormatWrite<CR>
 
+" Format after save
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost * FormatWrite
+augroup END
+
+" Jenkinsfile as groovy types
+augroup filetypedetect
+    autocmd BufRead,BufNewFile *.jenkinsfile set filetype=groovy
+augroup END
 
 lua<<EOF
-  --  Enable LuaLine
-  require('lualine').setup { }
 
-  --  Enable Fidget
-  require("fidget").setup { }
+  require'nvim-web-devicons'.setup {}
+  require'trouble'.setup {}
+  require'colorizer'.setup()
+  require'lualine'.setup { }
+  require'fidget'.setup { }
 
   require('plugins.lsp')
   require('plugins.formatter')
   require('plugins.gitsigns')
+  require('plugins.telescope')
+  require('plugins.harpoon')
+  require('plugins.autopairandtag')
+  require('plugins.treesitter')
 
   -- Leave buffer after select
   local autocmd = vim.api.nvim_create_autocmd
