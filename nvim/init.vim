@@ -64,9 +64,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/nvim-cmp'
 
-  " Trouble - LSP diagnostics, quickfix list, and location list
-  Plug 'folke/trouble.nvim'
-
   " Colorizer
   Plug 'norcalli/nvim-colorizer.lua'
 
@@ -180,7 +177,6 @@ augroup END
 lua<<EOF
 
   require'nvim-web-devicons'.setup {}
-  require'trouble'.setup {}
   require'colorizer'.setup()
   require'lualine'.setup { }
   require'fidget'.setup { }
